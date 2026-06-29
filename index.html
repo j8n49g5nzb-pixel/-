@@ -3,234 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مجرة حبنا السحرية 🌌💖</title>
+    <title>Galaxia de Amor | مجرة الحب الاحترافية 🌌💖</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&family=Reem_Kufi:wght=700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=600;900&family=Orbitron:wght=700;900&display=swap');
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #050014;
+            background-color: #020008;
             color: #fff;
             font-family: 'Cairo', sans-serif;
             min-height: 100vh;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            perspective: 1000px;
         }
 
-        /* حاوية الفضاء والمجرة */
-        .universe {
+        /* تأثير جزيئات الغبار الكوني في الخلفية */
+        .space-bg {
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: spaceFly 60s linear infinite;
+            opacity: 0.4;
+            z-index: 0;
+            transition: filter 1s ease;
+        }
+
+        @keyframes spaceFly {
+            from { transform: rotate(0deg) translateZ(0); }
+            to { transform: rotate(360deg) translateZ(50px); }
+        }
+
+        /* الحاوية الرئيسية للمشاهد ثلاثية الأبعاد */
+        .universe-viewport {
             position: relative;
             width: 100vw;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-        }
-
-        /* القلب المشع في المركز */
-        .galaxy-core {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: #ff0055;
-            transform: rotate(45deg);
-            box-shadow: 0 0 40px 20px #ff0055, 0 0 80px 40px #ff4d6d;
-            border-radius: 4px;
-            animation: pulseCore 2s infinite alternate ease-in-out;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
             z-index: 1;
-            top: 25%; /* رفع السنتر لفوق شوية عشان يسيب مساحة للكارت */
-        }
-        .galaxy-core::before, .galaxy-core::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: #ff0055;
-            border-radius: 50%;
-        }
-        .galaxy-core::before { left: -30px; }
-        .galaxy-core::after { top: -30px; }
-
-        @keyframes pulseCore {
-            0% { transform: rotate(45deg) scale(0.9); opacity: 0.8; }
-            100% { transform: rotate(45deg) scale(1.1); opacity: 1; box-shadow: 0 0 60px 30px #ff0055, 0 0 100px 50px #ff758f; }
         }
 
-        /* حلقة المجرة الدوارة مسطحة ومناسبة للموبايل */
-        .galaxy-spiral {
+        /* ستايل المشهد العام */
+        .scene {
             position: absolute;
             width: 100vw;
-            height: 100vw;
-            max-width: 500px;
-            max-height: 500px;
-            top: 5%;
-            animation: spinGalaxy 30s linear infinite;
-            z-index: 2;
-            pointer-events: none; /* عشان تلمس اللي تحتها براحتك */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            transition: opacity 0.8s ease, transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- المشهد 1: بوابة المجرة --- */
+        .scene-1 { transform: translateZ(0px); }
+        /* --- المشهد 2: كوكب الذكريات --- */
+        .scene-2 { transform: translateZ(-2000px) rotateY(90deg); }
+        /* --- المشهد 3: سديم العشق --- */
+        .scene-3 { transform: translateZ(-4000px) rotateX(90deg); }
+        /* --- المشهد 4: نهاية الكون الملوكي --- */
+        .scene-4 { transform: translateZ(-6000px) rotateZ(180deg); }
+
+        /* المجرة الحلزونية الدوارة لكل مشهد بتأثير نيون محترف */
+        .galaxy-spiral {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            top: 10%;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            transform: rotateX(75deg) rotateY(-15deg);
+            animation: spinGalaxy 25s linear infinite;
+            pointer-events: none;
         }
 
         @keyframes spinGalaxy {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-360deg); }
+            0% { transform: rotateX(75deg) rotateY(-15deg) rotateZ(0deg); }
+            100% { transform: rotateX(75deg) rotateY(-15deg) rotateZ(-360deg); }
         }
 
-        /* العناصر الطائرة */
-        .cosmic-item {
+        .core-heart {
             position: absolute;
+            width: 70px;
+            height: 70px;
+            background: #ff0055;
+            transform: translate(-50%, -50%) rotate(45deg);
             top: 50%;
             left: 50%;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 30px #ff0055);
+        }
+        .core-heart::before, .core-heart::after {
+            content: ''; position: absolute; width: 70px; height: 70px; background: #ff0055; border-radius: 50%;
+        }
+        .core-heart::before { left: -35px; }
+        .core-heart::after { top: -35px; }
+
+        .cosmic-text {
+            position: absolute;
+            top: 50%; left: 50%;
             white-space: nowrap;
             color: #fff;
-            text-shadow: 0 0 8px #ff4d6d, 0 0 15px #ff4d6d;
             font-weight: 900;
-            opacity: 0.75;
+            text-shadow: 0 0 10px #ff4d6d;
+            font-size: 14px;
         }
 
-        /* كارت الرسالة المنبثق - تعديل الأبعاد والمكان */
-        .message-card {
+        /* كروت الكلام الزجاجية الفخمة (Glassmorphism) */
+        .premium-card {
             position: absolute;
-            bottom: 40px; /* مثبت تحت السنتر ومناسب لكل الشاشات */
-            background: rgba(15, 5, 25, 0.85);
-            border: 2px solid #ff4d6d;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 20px;
+            bottom: 6%;
+            background: rgba(6, 2, 16, 0.75);
+            border: 1px solid rgba(255, 77, 109, 0.35);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 25px 20px;
+            border-radius: 24px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(255, 0, 85, 0.4);
-            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 77, 109, 0.1);
+            width: 88%;
             max-width: 360px;
-            z-index: 9999; /* أعلى حاجة في الشاشة عشان الزرار يشتغل */
-            animation: floatCard 4s infinite alternate ease-in-out;
+            transform: translateZ(50px); /* يبرز الكارت للأمام في البعد الثالث */
+            border-top-right-radius: 0;
         }
 
-        @keyframes floatCard {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-10px); }
-        }
-
-        .message-card h1 {
+        .premium-card h2 {
             color: #ff4d6d;
-            font-family: 'Reem Kufi', sans-serif;
             font-size: 22px;
             margin-bottom: 12px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
         }
 
-        .message-card p {
+        .premium-card p {
             font-size: 15px;
-            line-height: 1.6;
-            color: #f0f0f0;
-            margin-bottom: 15px;
-            min-height: 72px; /* تثبيت المساحة عشان الكارت ميهزش */
+            line-height: 1.7;
+            color: #e2e2e2;
+            margin-bottom: 20px;
         }
 
-        .message-card .btn {
-            background: linear-gradient(45deg, #d90429, #ff4d6d);
-            color: white;
+        /* أزرار مخصصة احترافية بتأثير نبضي */
+        .nav-btn {
+            background: linear-gradient(135deg, #ff0055, #d90429);
+            color: #fff;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 0;
+            width: 85%;
             font-size: 15px;
             font-weight: bold;
+            font-family: 'Cairo', sans-serif;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-            font-family: 'Cairo', sans-serif;
-            transition: 0.2s;
-            display: inline-block;
-            width: 80%;
-            -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 8px 20px rgba(255, 0, 85, 0.35);
+            transition: all 0.3s ease;
         }
 
-        .message-card .btn:active {
-            transform: scale(0.95);
+        .nav-btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 4px 10px rgba(255, 0, 85, 0.2);
         }
+
+        /* تأثيرات الإضاءة الملونة الخاصة بكل مشهد */
+        .scene-1 .core-heart { filter: drop-shadow(0 0 40px #ff0055); }
+        .scene-2 .core-heart { background: #9d4edd; filter: drop-shadow(0 0 40px #9d4edd); }
+        .scene-2 .core-heart::before, .scene-2 .core-heart::after { background: #9d4edd; }
+        .scene-2 .premium-card { border-color: rgba(157, 78, 221, 0.4); }
+        .scene-2 .premium-card h2 { color: #b5179e; }
+        .scene-2 .nav-btn { background: linear-gradient(135deg, #7209b7, #b5179e); box-shadow: 0 8px 20px rgba(114, 9, 183, 0.35); }
+
+        .scene-3 .core-heart { background: #00f5d4; filter: drop-shadow(0 0 40px #00f5d4); }
+        .scene-3 .core-heart::before, .scene-3 .core-heart::after { background: #00f5d4; }
+        .scene-3 .premium-card { border-color: rgba(0, 245, 212, 0.4); }
+        .scene-3 .premium-card h2 { color: #00bbf9; }
+        .scene-3 .nav-btn { background: linear-gradient(135deg, #00bbf9, #00f5d4); box-shadow: 0 8px 20px rgba(0, 187, 249, 0.35); color: #000; }
 
         audio { display: none; }
     </style>
 </head>
 <body>
 
+    <div class="space-bg" id="space"></div>
+
+    <div class="universe-viewport" id="viewport">
+
+        <div class="scene scene-1 active" id="s1">
+            <div class="galaxy-spiral" id="spiral1">
+                <div class="core-heart"></div>
+            </div>
+            <div class="premium-card">
+                <h2>مجرّة ملوكة السحرية 🌌</h2>
+                <p>كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖</p>
+                <button class="nav-btn" onclick="goToScene(2, 'rotateY(-90deg) translateZ(2000px)')">دخول البُعد الثاني 🚀</button>
+            </div>
+        </div>
+
+        <div class="scene scene-2" id="s2">
+            <div class="galaxy-spiral" id="spiral2">
+                <div class="core-heart"></div>
+            </div>
+            <div class="premium-card">
+                <h2>كوكب العيون الأجمل 🔮</h2>
+                <p>في كل ركن في المجرة دي، وفي كل نبضة من نبضات قلبي، مفيش غير اسمك وبس.. ربنا يخليكي ليا يا أحلى عيون في الكون كله! 💕🦋</p>
+                <button class="nav-btn" onclick="goToScene(3, 'rotateX(-90deg) translateZ(4000px)')">الانتقال لسديم العشق 🌀</button>
+            </div>
+        </div>
+
+        <div class="scene scene-3" id="s3">
+            <div class="galaxy-spiral" id="spiral3">
+                <div class="core-heart"></div>
+            </div>
+            <div class="premium-card">
+                <h2>نجمة سمايا الوحيدة 💎</h2>
+                <p>مهما لفيت الدنيا ومهما شفت نجوم، هيفضل مكانك فوق عالي ومنور دنيتي.. مخلية حياتي كلها حب وسعادة، بعشقك لآخر يوم في عمري! ✨❤️</p>
+                <button class="nav-btn" onclick="goToScene(4, 'rotateZ(-180deg) translateZ(6000px)')">الوصول لمركز الكون 👑</button>
+            </div>
+        </div>
+
+        <div class="scene scene-4" id="s4">
+            <div class="galaxy-spiral" id="spiral4">
+                <div class="core-heart"></div>
+            </div>
+            <div class="premium-card">
+                <h2>وعد ماليش غيره ♾️</h2>
+                <p>حبك محفور جوة كودي وجوة قلبي، وهتفضلي ملكة عالمي الخاص للأبد. المفاجأة دي معمولة مخصوص علشان تفرح قلبك الأبيض يا ملوكتي! 💖👑</p>
+                <button class="nav-btn" onclick="goToScene(1, 'translateZ(0px)')">إعادة رحلة الفضاء 🔄</button>
+            </div>
+        </div>
+
+    </div>
+
     <audio id="bg-music" loop preload="auto">
         <source src="https://archive.org/download/amrdiab_202209/AmrDiab-AgmalEyoun.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="universe">
-        <div class="galaxy-core"></div>
-
-        <div class="galaxy-spiral" id="spiral"></div>
-
-        <div class="message-card">
-            <h1>مجرّة حبّنا السحرية ✨</h1>
-            <p id="card-text">كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖🌌</p>
-            <button class="btn" id="next-btn">اضغطي لرؤية المزيد 🚀</button>
-        </div>
-    </div>
-
     <script>
-        const spiral = document.getElementById('spiral');
-        const nextBtn = document.getElementById('next-btn');
-        const cardText = document.getElementById('card-text');
+        const viewport = document.getElementById('viewport');
+        const space = document.getElementById('space');
         const music = document.getElementById('bg-music');
 
-        const words = [
-            "بحبك", "ملوكتي 👑", "حياتي", "يا أجمل عيون", "أنتِ كوني", "فراشتي 🦋", 
-            "وتيني", "عشقي", "✨", "💖", "⭐", "❤️", "قمر دنيتي", "أميرتي", "دنيتي كلها"
-        ];
+        const words = ["بحبك", "ملوكتي 👑", "حياتي", "أنتِ كوني", "فراشتي 🦋", "وتيني", "عشقي", "✨", "💖", "❤️", "أميرتي"];
 
-        // توزيع الكلمات بشكل حلزوني منسق للموبايل داخل الدائرة
-        words.forEach((word, index) => {
-            const item = document.createElement('div');
-            item.classList.add('cosmic-item');
-            item.innerText = word;
-
-            const angle = (index / words.length) * Math.PI * 2;
-            const radius = 60 + (index * 9); // تقليص القطر ليناسب شاشة الموبايل ولا يخرج عنها
-
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
-            
-            item.style.transform = `translate(${x}px, ${y}px)`;
-            item.style.fontSize = `${12 + Math.random() * 6}px`;
-            
-            spiral.appendChild(item);
-        });
-
-        let step = 0;
-        
-        // دالة تغيير النصوص وتشغيل الموسيقى
-        function handleNext() {
-            if(music.paused) {
-                music.play().then(() => {
-                    music.currentTime = 120;
-                }).catch(e => console.log("الصوت يحتاج ضغطة مستخدم"));
-            }
-
-            step++;
-            if (step === 1) {
-                cardText.innerHTML = "في كل ركن في المجرة دي، وفى كل نبضة من نبضات قلبي، مفيش غير اسمك أنتِ وبس يا ملوكتي.. ربنا يخليكي ليا يا أحلى عيون في الكون! 💕🦋";
-                nextBtn.innerText = "عالمنا الخاص 👑";
-            } else if (step === 2) {
-                cardText.innerHTML = "مهما لفيت الدنيا ومهما شفت نجوم، هتفضلي أنتِ النجمة الوحيدة اللي منورة سمايا ومخلية دنيتي كلها حب وسعادة.. بعشقك لآخر يوم في عمري! ✨❤️";
-                nextBtn.innerText = "إعادة الرحلة 🔄";
-                step = -1;
-            } else {
-                cardText.innerHTML = "كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖🌌";
-                nextBtn.innerText = "اضغطي لرؤية المزيد 🚀";
-                step = 0;
-            }
+        // توليد الكلمات الحلزونية الموزعة بدقة لكل المجرات في المشاهد
+        function buildSpiral(spiralId) {
+            const spiral = document.getElementById(spiralId);
+            words.forEach((word, index) => {
+                const item = document.createElement('div');
+                item.classList.add('cosmic-text');
+                item.innerText = word;
+                const angle = (index / words.length) * Math.PI * 2;
+                const radius = 60 + (index * 14);
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                item.style.transform = `translate(${x}px, ${y}px) rotateZ(${-angle * 180 / Math.PI}deg)`;
+                spiral.appendChild(item);
+            });
         }
 
-        // تشغيل الحدث باللمس السريع والضغط العادي لضمان استجابة الأيفون فوراً
-        nextBtn.addEventListener('click', handleNext);
+        // بناء الـ 4 مجرات
+        buildSpiral('spiral1');
+        buildSpiral('spiral2');
+        buildSpiral('spiral3');
+        buildSpiral('spiral4');
+
+        // دالة التنقل الاحترافية بين المشاهد (تأثير تيك توك السينمائي)
+        function goToScene(sceneNumber, transformValue) {
+            // تشغيل الأغنية من المقطع الحماسي في أول ضغطة
+            if(music.paused) {
+                music.play().then(() => { music.currentTime = 120; }).catch(e => {});
+            }
+
+            // تحريك حاوية الفضاء بالكامل (الكاميرا)
+            viewport.style.transform = transformValue;
+
+            // تغيير فلاتر الخلفية لإعطاء طابع لوني فريد لكل كوكب
+            if(sceneNumber === 2) space.style.filter = "hue-rotate(90deg) saturate(1.5)";
+            else if(sceneNumber === 3) space.style.filter = "hue-rotate(200deg) saturate(2)";
+            else if(sceneNumber === 4) space.style.filter = "hue-rotate(300deg) brightness(1.2)";
+            else space.style.filter = "none";
+
+            // إدارة إظهار وإخفاء الكروت بنعومة منعا للتداخل
+            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById(`s${sceneNumber}`).classList.add('active');
+            }, 400);
+        }
     </script>
 </body>
 </html>
