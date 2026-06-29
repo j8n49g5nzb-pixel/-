@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galaxia de Amor | مجرة الحب العالمية 🌌💖</title>
+    <title>Galaxia de Amor | التجربة السينمائية الفاخرة 🌌💖</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=600;900&display=swap');
 
@@ -19,11 +19,10 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #000;
+            background-color: #010005;
             font-family: 'Cairo', sans-serif;
         }
 
-        /* حاوية الـ 3D الحقيقية */
         #canvas-container {
             position: absolute;
             width: 100%;
@@ -33,66 +32,76 @@
             z-index: 1;
         }
 
-        /* كارت الرسالة الفخم المتناسق */
-        .interface-container {
+        /* واجهة الـ UI الفاخرة المستوحاة من تصاميم Apple للمحترفين */
+        .cinema-interface {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 380px;
-            background: rgba(5, 2, 12, 0.8);
-            border: 1px solid rgba(255, 0, 85, 0.4);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 24px;
-            padding: 25px 20px;
+            width: 92%;
+            max-width: 400px;
+            background: rgba(4, 2, 10, 0.65);
+            border: 1px solid rgba(255, 77, 109, 0.25);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 28px;
+            padding: 28px 24px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(255, 0, 85, 0.25);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                        0 0 40px rgba(255, 0, 85, 0.1);
             z-index: 10;
-            animation: floatCard 4s infinite alternate ease-in-out;
+            animation: spaceFloat 5s infinite alternate ease-in-out;
             border-top-right-radius: 0;
+            transition: border-color 1s ease, box-shadow 1s ease;
         }
 
-        @keyframes floatCard {
-            0% { transform: translate(-50%, 0px); }
-            100% { transform: translate(-50%, -10px); }
+        @keyframes spaceFloat {
+            0% { transform: translate(-50%, 0px) rotate(-0.5deg); }
+            100% { transform: translate(-50%, -12px) rotate(0.5deg); }
         }
 
-        .interface-container h1 {
-            color: #ff4d6d;
-            font-size: 22px;
+        .cinema-interface h1 {
+            color: #fff;
+            font-size: 24px;
             font-weight: 900;
             margin-bottom: 12px;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+            letter-spacing: 0.5px;
+            background: linear-gradient(45deg, #fff, #ff4d6d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .interface-container p {
+        .cinema-interface p {
             font-size: 15px;
-            line-height: 1.7;
-            color: #f0f0f0;
-            margin-bottom: 20px;
-            min-height: 75px;
-            transition: opacity 0.4s ease;
+            line-height: 1.8;
+            color: #e5e5e7;
+            margin-bottom: 24px;
+            min-height: 80px;
+            transition: opacity 0.5s ease;
+            font-weight: 500;
         }
 
-        .action-btn {
+        /* زرار هوليوودي تفاعلي مشع */
+        .cinema-btn {
             background: linear-gradient(135deg, #ff0055, #d90429);
             color: #fff;
             border: none;
-            padding: 14px 0;
-            width: 85%;
-            font-size: 15px;
+            padding: 16px 0;
+            width: 90%;
+            font-size: 16px;
             font-weight: bold;
             font-family: 'Cairo', sans-serif;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.4);
-            transition: transform 0.2s;
+            box-shadow: 0 10px 30px rgba(255, 0, 85, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 0.5px;
         }
 
-        .action-btn:active {
-            transform: scale(0.95);
+        .cinema-btn:active {
+            transform: scale(0.94);
+            box-shadow: 0 5px 15px rgba(255, 0, 85, 0.2);
         }
 
         audio { display: none; }
@@ -103,10 +112,10 @@
 
     <div id="canvas-container"></div>
 
-    <div class="interface-container">
+    <div class="cinema-interface" id="ui-card">
         <h1 id="card-title">مجرّة ملوكة السحرية 🌌</h1>
         <p id="card-text">كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖</p>
-        <button class="action-btn" id="next-btn" onclick="nextStep()">استكشاف البُعد التالي 🚀</button>
+        <button class="cinema-btn" id="next-btn" onclick="triggerCinematicJump()">السفر عبر الزمان والمكان 🚀</button>
     </div>
 
     <audio id="bg-music" loop preload="auto">
@@ -114,69 +123,96 @@
     </audio>
 
     <script>
-        let scene, camera, renderer, starParticles, galaxySpiral;
+        let scene, camera, renderer, starField, mainGalaxy, cosmicHearts;
+        let targetCamPos = { x: 0, y: 180, z: 500 };
+        let targetCamLook = { x: 0, y: 0, z: 0 };
+        let currentCamLook = { x: 0, y: 0, z: 0 };
+        let galaxyColor1 = new THREE.Color('#ff0055');
+        let galaxyColor2 = new THREE.Color('#7209b7');
+        
         const container = document.getElementById('canvas-container');
         const music = document.getElementById('bg-music');
 
-        // 1. إعداد الكون الافتراضي ثلاثي الأبعاد
-        function initThree() {
+        function initCinemaEngine() {
             scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x000000, 0.0015);
+            scene.fog = new THREE.FogExp2(0x010005, 0.0012);
 
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
-            camera.position.z = 400;
-            camera.position.y = 150;
-            camera.lookAt(0, 0, 0);
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
+            camera.position.set(targetCamPos.x, targetCamPos.y, targetCamPos.z);
 
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping; // إضاءة سينمائية احترافية مثل الأفلام
             container.appendChild(renderer.domElement);
 
-            // إضافة النجوم العشوائية في الخلفية
-            const starsGeometry = new THREE.BufferGeometry();
-            const starsCount = 2500;
-            const starPositions = new Float32Array(starsCount * 3);
+            // 1. توليد آلاف النجوم الخلفية البعيدة
+            buildDeepSpace();
 
-            for(let i=0; i < starsCount * 3; i++) {
-                starPositions[i] = (Math.random() - 0.5) * 1500;
-            }
-            starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-            const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true });
-            starParticles = new THREE.Points(starsGeometry, starsMaterial);
-            scene.add(starParticles);
+            // 2. توليد سديم القلوب الكونية الطائرة ثلاثية الأبعاد
+            buildCosmicHearts();
 
-            // بناء مجرة الدوامة التفاعلية
-            build3DGalaxy();
+            // 3. بناء المجرة الحلزونية العملاقة متطورة الطبقات
+            buildCinematicGalaxy();
 
             window.addEventListener('resize', onWindowResize);
-            animate();
+            renderLoop();
         }
 
-        // 2. هندسة الدوامة الحلزونية الاحترافية
-        function build3DGalaxy() {
-            galaxySpiral = new THREE.Group();
-            const particleCount = 1000;
+        function buildDeepSpace() {
+            const starsGeom = new THREE.BufferGeometry();
+            const count = 3000;
+            const positions = new Float32Array(count * 3);
+            for(let i=0; i<count*3; i++) { positions[i] = (Math.random() - 0.5) * 2000; }
+            starsGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.2, transparent: true, opacity: 0.6 });
+            starField = new THREE.Points(starsGeom, starsMat);
+            scene.add(starField);
+        }
+
+        function buildCosmicHearts() {
+            // نظام جزيئات متطور يتدفق باستمرار لإعطاء حركة الفيلم السينمائي
+            const heartCount = 150;
+            const geom = new THREE.BufferGeometry();
+            const positions = new Float32Array(heartCount * 3);
+            for(let i=0; i<heartCount; i++) {
+                positions[i*3] = (Math.random() - 0.5) * 400;
+                positions[i*3+1] = (Math.random() - 0.5) * 400;
+                positions[i*3+2] = (Math.random() - 0.5) * 800;
+            }
+            geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const mat = new THREE.PointsMaterial({
+                color: 0xff4d6d,
+                size: 6,
+                transparent: true,
+                opacity: 0.9,
+                blending: THREE.AdditiveBlending
+            });
+            cosmicHearts = new THREE.Points(geom, mat);
+            scene.add(cosmicHearts);
+        }
+
+        function buildCinematicGalaxy() {
+            mainGalaxy = new THREE.Group();
+            const count = 2500;
             const geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
 
-            const color1 = new THREE.Color('#ff0055');
-            const color2 = new THREE.Color('#7209b7');
+            for (let i = 0; i < count; i++) {
+                const r = Math.pow(Math.random(), 2.5) * 350; // تركيز النجوم في المركز مثل الثقوب السوداء الحقيقية
+                const arms = 3; // مجرة بثلاث أذرع حلزونية عملاقة
+                const theta = (i % arms) * ((2 * Math.PI) / arms) + r * 0.025;
 
-            for (let i = 0; i < particleCount; i++) {
-                const r = (i / particleCount) * 250;
-                const theta = i * 0.15;
-
-                const x = Math.cos(theta) * r + (Math.random() - 0.5) * 20;
-                const y = (Math.random() - 0.5) * 15;
-                const z = Math.sin(theta) * r + (Math.random() - 0.5) * 20;
+                const x = Math.cos(theta) * r + (Math.random() - 0.5) * 22;
+                const y = (Math.random() - 0.5) * 12;
+                const z = Math.sin(theta) * r + (Math.random() - 0.5) * 22;
 
                 positions[i * 3] = x;
                 positions[i * 3 + 1] = y;
                 positions[i * 3 + 2] = z;
 
-                const mixedColor = color1.clone().lerp(color2, Math.random());
+                const mixedColor = galaxyColor1.clone().lerp(galaxyColor2, r / 350);
                 colors[i * 3] = mixedColor.r;
                 colors[i * 3 + 1] = mixedColor.g;
                 colors[i * 3 + 2] = mixedColor.b;
@@ -186,27 +222,97 @@
             geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
             const material = new THREE.PointsMaterial({
-                size: 3.5,
+                size: 4.0,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.8,
+                opacity: 0.85,
                 blending: THREE.AdditiveBlending
             });
 
             const points = new THREE.Points(geometry, material);
-            galaxySpiral.add(points);
-            scene.add(galaxySpiral);
+            mainGalaxy.add(points);
+            scene.add(mainGalaxy);
         }
 
-        // 3. أنيميشن الحركة اللانهائية والكاميرا السينمائية
-        function animate() {
-            requestAnimationFrame(animate);
+        function renderLoop() {
+            requestAnimationFrame(renderLoop);
 
-            // حركة دوامة المجرة والنجوم
-            if(galaxySpiral) galaxySpiral.rotation.y -= 0.003;
-            if(starParticles) starParticles.rotation.y += 0.0005;
+            // دوران أذرع الكون والمجرات بشكل سينمائي فخم
+            if(mainGalaxy) mainGalaxy.rotation.y -= 0.0025;
+            if(starField) starField.rotation.y += 0.0003;
+            
+            // جعل القلوب الكونية تندفع نحو عيون المشاهد باستمرار كأننا بنطير جوة الفضاء
+            if(cosmicHearts) {
+                const positions = cosmicHearts.geometry.attributes.position.array;
+                for(let i=0; i<positions.length; i+=3) {
+                    positions[i+2] += 1.5; // الحركة للأمام
+                    if(positions[i+2] > 600) positions[i+2] = -400; // إعادة التوليد في الخلف عند العبور
+                }
+                cosmicHearts.geometry.attributes.position.needsUpdate = true;
+            }
+
+            // تطبيق تأثير الانسيابية والنعومة الفائقة لحركة الكاميرا (Lerp Smooth Interpolation)
+            camera.position.x += (targetCamPos.x - camera.position.x) * 0.05;
+            camera.position.y += (targetCamPos.y - camera.position.y) * 0.05;
+            camera.position.z += (targetCamPos.z - camera.position.z) * 0.05;
+
+            currentCamLook.x += (targetCamLook.x - currentCamLook.x) * 0.05;
+            currentCamLook.y += (targetCamLook.y - currentCamLook.y) * 0.05;
+            currentCamLook.z += (targetCamLook.z - currentCamLook.z) * 0.05;
+            camera.lookAt(currentCamLook.x, currentCamLook.y, currentCamLook.z);
 
             renderer.render(scene, camera);
+        }
+
+        let step = 0;
+        function triggerCinematicJump() {
+            if(music.paused) {
+                music.play().then(() => { music.currentTime = 120; }).catch(e => {});
+            }
+
+            step++;
+            const textEl = document.getElementById('card-text');
+            const titleEl = document.getElementById('card-title');
+            const btnEl = document.getElementById('next-btn');
+            const uiCard = document.getElementById('ui-card');
+
+            textEl.style.opacity = 0;
+
+            // حيلة هوليوودية: عمل اختراق سريع جداً بالكامل للداخل قبل الانتقال للمشهد التالي
+            targetCamPos = { x: (Math.random() - 0.5) * 50, y: (Math.random() - 0.5) * 50, z: -50 };
+            
+            setTimeout(() => {
+                if (step === 1) {
+                    titleEl.innerText = "كوكب العيون الأجمل 🔮";
+                    textEl.innerHTML = "في كل ركن في المجرة دي، وفي كل نبضة من نبضات قلبي، مفيش غير اسمك وبس.. ربنا يخليكي ليا يا أحلى عيون في الكون كله! 💕🦋";
+                    btnEl.innerText = "التحليق لسديم العشق 🌀";
+                    
+                    // مشهد من الأعلى لأسفل (Eagle Eye Cinematic Shot)
+                    targetCamPos = { x: 0, y: 450, z: 150 };
+                    uiCard.style.borderColor = "rgba(157, 78, 221, 0.5)";
+                    uiCard.style.boxShadow = "0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(157, 78, 221, 0.2)";
+                } else if (step === 2) {
+                    titleEl.innerText = "نجمة سمايا الوحيدة 💎";
+                    textEl.innerHTML = "مهما لفيت الدنيا ومهما شفت نجوم، هيفضل مكانك فوق عالي ومنور دنيتي.. مخلية حياتي كلها حب وسعادة، بعشقك لآخر يوم في عمري! ✨❤️";
+                    btnEl.innerText = "الوصول لمركز الكون 👑";
+                    
+                    // مشهد جانبي مائل سينمائي من حافة الأذرع (Close Cinematic Track)
+                    targetCamPos = { x: -320, y: 60, z: -200 };
+                    uiCard.style.borderColor = "rgba(0, 245, 212, 0.5)";
+                    uiCard.style.boxShadow = "0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 245, 212, 0.2)";
+                } else {
+                    titleEl.innerText = "مجرّة ملوكة السحرية 🌌";
+                    textEl.innerHTML = "كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖";
+                    btnEl.innerText = "السفر عبر الزمان والمكان 🚀";
+                    
+                    // العودة للمشهد الأولي الواسع الفخم
+                    targetCamPos = { x: 0, y: 180, z: 500 };
+                    uiCard.style.borderColor = "rgba(255, 77, 109, 0.25)";
+                    uiCard.style.boxShadow = "0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 0, 85, 0.1)";
+                    step = 0;
+                }
+                textEl.style.opacity = 1;
+            }, 600); // الانتقال بيتم بنعومة في نص ثانية أثناء الخدعة السينمائية
         }
 
         function onWindowResize() {
@@ -215,51 +321,7 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
-        // 4. نظام التحكم بالخطوات والتنقل الفضائي الديناميكي
-        let currentStep = 0;
-        function nextStep() {
-            if(music.paused) {
-                music.play().then(() => { music.currentTime = 120; }).catch(e => {});
-            }
-
-            currentStep++;
-            const textEl = document.getElementById('card-text');
-            const titleEl = document.getElementById('card-title');
-            const btnEl = document.getElementById('next-btn');
-
-            textEl.style.opacity = 0;
-
-            setTimeout(() => {
-                if (currentStep === 1) {
-                    titleEl.innerText = "كوكب العيون الأجمل 🔮";
-                    textEl.innerHTML = "في كل ركن في المجرة دي، وفي كل نبضة من نبضات قلبي، مفيش غير اسمك وبس.. ربنا يخليكي ليا يا أحلى عيون في الكون كله! 💕🦋";
-                    btnEl.innerText = "التحليق لسديم العشق 🌌";
-                    
-                    // تحريك الكاميرا لمشهد وزاوية جديدة تماماً
-                    camera.position.set(0, 300, 100);
-                    camera.lookAt(0,0,0);
-                } else if (currentStep === 2) {
-                    titleEl.innerText = "نجمة سمايا الوحيدة 💎";
-                    textEl.innerHTML = "مهما لفيت الدنيا ومهما شفت نجوم، هيفضل مكانك فوق عالي ومنور دنيتي.. مخلية حياتي كلها حب وسعادة، بعشقك لآخر يوم في عمري! ✨❤️";
-                    btnEl.innerText = "الوصول لمركز الكون 👑";
-                    
-                    camera.position.set(250, 80, 250);
-                    camera.lookAt(0,0,0);
-                } else {
-                    titleEl.innerText = "مجرّة ملوكة السحرية 🌌";
-                    textEl.innerHTML = "كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖";
-                    btnEl.innerText = "استكشاف البُعد التالي 🚀";
-                    
-                    camera.position.set(0, 150, 400);
-                    camera.lookAt(0,0,0);
-                    currentStep = 0;
-                }
-                textEl.style.opacity = 1;
-            }, 400);
-        }
-
-        // تشغيل كل شيء عند فتح الصفحة
-        window.onload = initThree;
+        window.onload = initCinemaEngine;
     </script>
 </body>
 </html>
