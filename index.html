@@ -32,7 +32,6 @@
             z-index: 1;
         }
 
-        /* واجهة مستخدم زجاجية فخمة جداً بنظام الشفافية الحديث */
         .premium-interface {
             position: absolute;
             bottom: 40px;
@@ -40,7 +39,7 @@
             transform: translateX(-50%);
             width: 92%;
             max-width: 400px;
-            background: rgba(3, 1, 10, 0.7);
+            background: rgba(3, 1, 10, 0.75);
             border: 1px solid rgba(255, 77, 109, 0.35);
             backdrop-filter: blur(35px) saturate(200%);
             -webkit-backdrop-filter: blur(35px) saturate(200%);
@@ -126,21 +125,19 @@
         const container = document.getElementById('canvas-container');
         const music = document.getElementById('bg-music');
 
-        // ألوان المجرات المتغيرة العميقة
         const galaxyThemes = [
             { c1: '#ff0055', c2: '#4a00e0', bg: 0x02000c, title: "مجرّة ملوكة الورديّة 🌌💖" },
             { c1: '#8e2de2', c2: '#4a00e0', bg: 0x040014, title: "سديم الأرجوان الساحر 🔮✨" },
             { c1: '#00f2fe', c2: '#4facfe', bg: 0x00040f, title: "بُعد الفيروز اللانهائي 💎🌀" }
         ];
 
-        // روابط صور مرتبين فوتوغرافية واستيكرات حب حقيقية وتريندي عالية الجودة
         const trendingLoveUrls = [
-            'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=150&auto=format&fit=crop&q=80', // يدين متشابكتين لمرتبطين
-            'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=150&auto=format&fit=crop&q=80', // قلب مرسوم باليد فخم
-            'https://cdn-icons-png.flaticon.com/512/3656/3656836.png', // استيكر تريند لقلب نيون مشع
-            'https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=150&auto=format&fit=crop&q=80', // كابلز مرتبطين في الغروب سينمائي
-            'https://cdn-icons-png.flaticon.com/512/4214/4214065.png', // استيكر دبدوب تريندي ماسك قلب فخم
-            'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=150&auto=format&fit=crop&q=80'  // ظل كابلز مرتبطين كيوت جداً
+            'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=150&auto=format&fit=crop&q=80',
+            'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=150&auto=format&fit=crop&q=80',
+            'https://cdn-icons-png.flaticon.com/512/3656/3656836.png',
+            'https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=150&auto=format&fit=crop&q=80',
+            'https://cdn-icons-png.flaticon.com/512/4214/4214065.png',
+            'https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=150&auto=format&fit=crop&q=80'
         ];
 
         function initCinemaEngine() {
@@ -150,7 +147,7 @@
             camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
             camera.position.set(targetCamPos.x, targetCamPos.y, targetCamPos.z);
 
-            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance", alpha: false });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -164,24 +161,22 @@
             renderLoop();
         }
 
-        // 1. توليد خلفية النجوم العميقة
         function buildDeepSpace() {
             const starsGeom = new THREE.BufferGeometry();
-            const count = 3500;
+            const count = 4000;
             const positions = new Float32Array(count * 3);
             for(let i=0; i<count*3; i++) { positions[i] = (Math.random() - 0.5) * 2000; }
             starsGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.1, transparent: true, opacity: 0.6 });
+            const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.2, transparent: true, opacity: 0.8 });
             starField = new THREE.Points(starsGeom, starsMat);
             scene.add(starField);
         }
 
-        // 2. بناء مجرة واقعية فائقة الكثافة (تأثير الغبار النجمي الدوار)
         function buildRealisticGalaxy(colorHex1, colorHex2) {
             if(mainGalaxy) scene.remove(mainGalaxy);
 
             mainGalaxy = new THREE.Group();
-            const count = 8000; // زيادة الكثافة لتبدو كالمجرات الحقيقية
+            const count = 12000; 
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(count * 3);
             const colors = new Float32Array(count * 3);
@@ -190,20 +185,18 @@
             const c2 = new THREE.Color(colorHex2);
 
             for (let i = 0; i < count; i++) {
-                // محاكاة لولبية حقيقية وثقب أسود في المنتصف
-                const r = Math.pow(Math.random(), 2.0) * 420;
-                const arms = 2; // ذراعين مجرة رئيسيين زي مجرة درب التبانة
-                const theta = (i % arms) * (Math.PI) + r * 0.028;
+                const r = Math.pow(Math.random(), 1.8) * 450;
+                const arms = 2; 
+                const theta = (i % arms) * (Math.PI) + r * 0.03;
 
-                // تشتيت عشوائي ذكي لخلق غبار كوني واقعي مش مجرد خطوط هندسية
-                const spreadX = (Math.pow(Math.random(), 2) * (Math.random() < 0.5 ? 1 : -1)) * 35;
-                const spreadZ = (Math.pow(Math.random(), 2) * (Math.random() < 0.5 ? 1 : -1)) * 35;
+                const spreadX = (Math.pow(Math.random(), 2) * (Math.random() < 0.5 ? 1 : -1)) * 40;
+                const spreadZ = (Math.pow(Math.random(), 2) * (Math.random() < 0.5 ? 1 : -1)) * 40;
 
                 positions[i * 3] = Math.cos(theta) * r + spreadX;
-                positions[i * 3 + 1] = (Math.random() - 0.5) * (30 * (1 - r/420)); // المركز سميك والأطراف رفيعة واقعياً
+                positions[i * 3 + 1] = (Math.random() - 0.5) * (35 * (1 - r/450)); 
                 positions[i * 3 + 2] = Math.sin(theta) * r + spreadZ;
 
-                const mixedColor = c1.clone().lerp(c2, r / 420);
+                const mixedColor = c1.clone().lerp(c2, r / 450);
                 colors[i * 3] = mixedColor.r;
                 colors[i * 3 + 1] = mixedColor.g;
                 colors[i * 3 + 2] = mixedColor.b;
@@ -212,12 +205,11 @@
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-            // جعل جزيئات الغبار النجمي ناعمة ومتداخلة نيون
             const material = new THREE.PointsMaterial({
-                size: 3.5,
+                size: 2.5,
                 vertexColors: true,
                 transparent: true,
-                opacity: 0.75,
+                opacity: 0.85,
                 blending: THREE.AdditiveBlending
             });
 
@@ -226,7 +218,6 @@
             scene.add(mainGalaxy);
         }
 
-        // 3. تحميل صور المرتبطين والاستيكرات الفوتوغرافية التريندي
         function buildTrendyStickers() {
             const textureLoader = new THREE.TextureLoader();
             
@@ -243,13 +234,12 @@
                         (Math.random() - 0.5) * 1100
                     );
                     
-                    // أحجام متناسقة تجعل الصور تبدو فخمة وواضحة
-                    const scale = 25 + Math.random() * 25;
+                    const scale = 30 + Math.random() * 20;
                     sprite.scale.set(scale, scale, 1);
                     
                     sprite.userData = {
-                        speedZ: 1.0 + Math.random() * 1.8,
-                        rotSpeed: (Math.random() - 0.5) * 0.015
+                        speedZ: 1.2 + Math.random() * 1.5,
+                        rotSpeed: (Math.random() - 0.5) * 0.01
                     };
 
                     stickerObjects.push(sprite);
@@ -261,15 +251,13 @@
         function renderLoop() {
             requestAnimationFrame(renderLoop);
 
-            if(mainGalaxy) mainGalaxy.rotation.y -= 0.0018;
+            if(mainGalaxy) mainGalaxy.rotation.y -= 0.002;
             if(starField) starField.rotation.y += 0.0001;
             
-            // تحريك صور المرتبطين والاستيكرات التريندي في العمق السينمائي
             stickerObjects.forEach(sprite => {
                 sprite.position.z += sprite.userData.speedZ;
                 sprite.rotation.z += sprite.userData.rotSpeed;
                 
-                // إعادة التدوير اللانهائي عند تخطي الكاميرا
                 if(sprite.position.z > 550) {
                     sprite.position.z = -550;
                     sprite.position.x = (Math.random() - 0.5) * 600;
@@ -277,7 +265,6 @@
                 }
             });
 
-            // حركة انسيابية مرنة فائقة النعومة للكاميرا
             camera.position.x += (targetCamPos.x - camera.position.x) * 0.05;
             camera.position.y += (targetCamPos.y - camera.position.y) * 0.05;
             camera.position.z += (targetCamPos.z - camera.position.z) * 0.05;
@@ -286,7 +273,6 @@
             renderer.render(scene, camera);
         }
 
-        // 4. الانتقال السينمائي المذهل عبر الأبعاد والمليء بالزوم والألوان
         function triggerCinematicWarp() {
             if(music.paused) {
                 music.play().then(() => { music.currentTime = 120; }).catch(e => {});
@@ -302,7 +288,6 @@
 
             textEl.style.opacity = 0;
 
-            // زوم الـ Warp السريع لداخل قلب المجرة قبل النقلة الـ 3D
             targetCamPos = { x: 0, y: 0, z: -120 };
             
             setTimeout(() => {
@@ -332,7 +317,6 @@
                     uiCard.style.boxShadow = "0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 0, 85, 0.2)";
                 }
 
-                // تغيير خامات وتركيبة غبار المجرة ديناميكياً مع تعديل لون الضباب الخلفي
                 buildRealisticGalaxy(theme.c1, theme.c2);
                 renderer.setClearColor(theme.bg);
                 scene.fog.color.setHex(theme.bg);
