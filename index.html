@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galaxia de Amor | مجرة الحب الاحترافية 🌌💖</title>
+    <title>Galaxia de Amor | مجرة الحب العالمية 🌌💖</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=600;900&family=Orbitron:wght=700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=600;900&display=swap');
 
         * {
             box-sizing: border-box;
@@ -15,161 +15,68 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            background-color: #020008;
-            color: #fff;
-            font-family: 'Cairo', sans-serif;
-            min-height: 100vh;
+        body, html {
+            width: 100%;
+            height: 100%;
             overflow: hidden;
-            perspective: 1000px;
+            background-color: #000;
+            font-family: 'Cairo', sans-serif;
         }
 
-        /* تأثير جزيئات الغبار الكوني في الخلفية */
-        .space-bg {
-            position: fixed;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            animation: spaceFly 60s linear infinite;
-            opacity: 0.4;
-            z-index: 0;
-            transition: filter 1s ease;
-        }
-
-        @keyframes spaceFly {
-            from { transform: rotate(0deg) translateZ(0); }
-            to { transform: rotate(360deg) translateZ(50px); }
-        }
-
-        /* الحاوية الرئيسية للمشاهد ثلاثية الأبعاد */
-        .universe-viewport {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        /* حاوية الـ 3D الحقيقية */
+        #canvas-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
             z-index: 1;
         }
 
-        /* ستايل المشهد العام */
-        .scene {
+        /* كارت الرسالة الفخم المتناسق */
+        .interface-container {
             position: absolute;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-            transition: opacity 0.8s ease, transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .scene.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* --- المشهد 1: بوابة المجرة --- */
-        .scene-1 { transform: translateZ(0px); }
-        /* --- المشهد 2: كوكب الذكريات --- */
-        .scene-2 { transform: translateZ(-2000px) rotateY(90deg); }
-        /* --- المشهد 3: سديم العشق --- */
-        .scene-3 { transform: translateZ(-4000px) rotateX(90deg); }
-        /* --- المشهد 4: نهاية الكون الملوكي --- */
-        .scene-4 { transform: translateZ(-6000px) rotateZ(180deg); }
-
-        /* المجرة الحلزونية الدوارة لكل مشهد بتأثير نيون محترف */
-        .galaxy-spiral {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            top: 10%;
-            border-radius: 50%;
-            transform-style: preserve-3d;
-            transform: rotateX(75deg) rotateY(-15deg);
-            animation: spinGalaxy 25s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes spinGalaxy {
-            0% { transform: rotateX(75deg) rotateY(-15deg) rotateZ(0deg); }
-            100% { transform: rotateX(75deg) rotateY(-15deg) rotateZ(-360deg); }
-        }
-
-        .core-heart {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            background: #ff0055;
-            transform: translate(-50%, -50%) rotate(45deg);
-            top: 50%;
+            bottom: 30px;
             left: 50%;
-            border-radius: 4px;
-            filter: drop-shadow(0 0 30px #ff0055);
-        }
-        .core-heart::before, .core-heart::after {
-            content: ''; position: absolute; width: 70px; height: 70px; background: #ff0055; border-radius: 50%;
-        }
-        .core-heart::before { left: -35px; }
-        .core-heart::after { top: -35px; }
-
-        .cosmic-text {
-            position: absolute;
-            top: 50%; left: 50%;
-            white-space: nowrap;
-            color: #fff;
-            font-weight: 900;
-            text-shadow: 0 0 10px #ff4d6d;
-            font-size: 14px;
-        }
-
-        /* كروت الكلام الزجاجية الفخمة (Glassmorphism) */
-        .premium-card {
-            position: absolute;
-            bottom: 6%;
-            background: rgba(6, 2, 16, 0.75);
-            border: 1px solid rgba(255, 77, 109, 0.35);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 25px 20px;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 380px;
+            background: rgba(5, 2, 12, 0.8);
+            border: 1px solid rgba(255, 0, 85, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-radius: 24px;
+            padding: 25px 20px;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 77, 109, 0.1);
-            width: 88%;
-            max-width: 360px;
-            transform: translateZ(50px); /* يبرز الكارت للأمام في البعد الثالث */
+            box-shadow: 0 20px 60px rgba(255, 0, 85, 0.25);
+            z-index: 10;
+            animation: floatCard 4s infinite alternate ease-in-out;
             border-top-right-radius: 0;
         }
 
-        .premium-card h2 {
+        @keyframes floatCard {
+            0% { transform: translate(-50%, 0px); }
+            100% { transform: translate(-50%, -10px); }
+        }
+
+        .interface-container h1 {
             color: #ff4d6d;
             font-size: 22px;
-            margin-bottom: 12px;
             font-weight: 900;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
         }
 
-        .premium-card p {
+        .interface-container p {
             font-size: 15px;
             line-height: 1.7;
-            color: #e2e2e2;
+            color: #f0f0f0;
             margin-bottom: 20px;
+            min-height: 75px;
+            transition: opacity 0.4s ease;
         }
 
-        /* أزرار مخصصة احترافية بتأثير نبضي */
-        .nav-btn {
+        .action-btn {
             background: linear-gradient(135deg, #ff0055, #d90429);
             color: #fff;
             border: none;
@@ -180,82 +87,26 @@
             font-family: 'Cairo', sans-serif;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 0, 85, 0.35);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.4);
+            transition: transform 0.2s;
         }
 
-        .nav-btn:active {
-            transform: scale(0.96);
-            box-shadow: 0 4px 10px rgba(255, 0, 85, 0.2);
+        .action-btn:active {
+            transform: scale(0.95);
         }
-
-        /* تأثيرات الإضاءة الملونة الخاصة بكل مشهد */
-        .scene-1 .core-heart { filter: drop-shadow(0 0 40px #ff0055); }
-        .scene-2 .core-heart { background: #9d4edd; filter: drop-shadow(0 0 40px #9d4edd); }
-        .scene-2 .core-heart::before, .scene-2 .core-heart::after { background: #9d4edd; }
-        .scene-2 .premium-card { border-color: rgba(157, 78, 221, 0.4); }
-        .scene-2 .premium-card h2 { color: #b5179e; }
-        .scene-2 .nav-btn { background: linear-gradient(135deg, #7209b7, #b5179e); box-shadow: 0 8px 20px rgba(114, 9, 183, 0.35); }
-
-        .scene-3 .core-heart { background: #00f5d4; filter: drop-shadow(0 0 40px #00f5d4); }
-        .scene-3 .core-heart::before, .scene-3 .core-heart::after { background: #00f5d4; }
-        .scene-3 .premium-card { border-color: rgba(0, 245, 212, 0.4); }
-        .scene-3 .premium-card h2 { color: #00bbf9; }
-        .scene-3 .nav-btn { background: linear-gradient(135deg, #00bbf9, #00f5d4); box-shadow: 0 8px 20px rgba(0, 187, 249, 0.35); color: #000; }
 
         audio { display: none; }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <div class="space-bg" id="space"></div>
+    <div id="canvas-container"></div>
 
-    <div class="universe-viewport" id="viewport">
-
-        <div class="scene scene-1 active" id="s1">
-            <div class="galaxy-spiral" id="spiral1">
-                <div class="core-heart"></div>
-            </div>
-            <div class="premium-card">
-                <h2>مجرّة ملوكة السحرية 🌌</h2>
-                <p>كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖</p>
-                <button class="nav-btn" onclick="goToScene(2, 'rotateY(-90deg) translateZ(2000px)')">دخول البُعد الثاني 🚀</button>
-            </div>
-        </div>
-
-        <div class="scene scene-2" id="s2">
-            <div class="galaxy-spiral" id="spiral2">
-                <div class="core-heart"></div>
-            </div>
-            <div class="premium-card">
-                <h2>كوكب العيون الأجمل 🔮</h2>
-                <p>في كل ركن في المجرة دي، وفي كل نبضة من نبضات قلبي، مفيش غير اسمك وبس.. ربنا يخليكي ليا يا أحلى عيون في الكون كله! 💕🦋</p>
-                <button class="nav-btn" onclick="goToScene(3, 'rotateX(-90deg) translateZ(4000px)')">الانتقال لسديم العشق 🌀</button>
-            </div>
-        </div>
-
-        <div class="scene scene-3" id="s3">
-            <div class="galaxy-spiral" id="spiral3">
-                <div class="core-heart"></div>
-            </div>
-            <div class="premium-card">
-                <h2>نجمة سمايا الوحيدة 💎</h2>
-                <p>مهما لفيت الدنيا ومهما شفت نجوم، هيفضل مكانك فوق عالي ومنور دنيتي.. مخلية حياتي كلها حب وسعادة، بعشقك لآخر يوم في عمري! ✨❤️</p>
-                <button class="nav-btn" onclick="goToScene(4, 'rotateZ(-180deg) translateZ(6000px)')">الوصول لمركز الكون 👑</button>
-            </div>
-        </div>
-
-        <div class="scene scene-4" id="s4">
-            <div class="galaxy-spiral" id="spiral4">
-                <div class="core-heart"></div>
-            </div>
-            <div class="premium-card">
-                <h2>وعد ماليش غيره ♾️</h2>
-                <p>حبك محفور جوة كودي وجوة قلبي، وهتفضلي ملكة عالمي الخاص للأبد. المفاجأة دي معمولة مخصوص علشان تفرح قلبك الأبيض يا ملوكتي! 💖👑</p>
-                <button class="nav-btn" onclick="goToScene(1, 'translateZ(0px)')">إعادة رحلة الفضاء 🔄</button>
-            </div>
-        </div>
-
+    <div class="interface-container">
+        <h1 id="card-title">مجرّة ملوكة السحرية 🌌</h1>
+        <p id="card-text">كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖</p>
+        <button class="action-btn" id="next-btn" onclick="nextStep()">استكشاف البُعد التالي 🚀</button>
     </div>
 
     <audio id="bg-music" loop preload="auto">
@@ -263,56 +114,152 @@
     </audio>
 
     <script>
-        const viewport = document.getElementById('viewport');
-        const space = document.getElementById('space');
+        let scene, camera, renderer, starParticles, galaxySpiral;
+        const container = document.getElementById('canvas-container');
         const music = document.getElementById('bg-music');
 
-        const words = ["بحبك", "ملوكتي 👑", "حياتي", "أنتِ كوني", "فراشتي 🦋", "وتيني", "عشقي", "✨", "💖", "❤️", "أميرتي"];
+        // 1. إعداد الكون الافتراضي ثلاثي الأبعاد
+        function initThree() {
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.0015);
 
-        // توليد الكلمات الحلزونية الموزعة بدقة لكل المجرات في المشاهد
-        function buildSpiral(spiralId) {
-            const spiral = document.getElementById(spiralId);
-            words.forEach((word, index) => {
-                const item = document.createElement('div');
-                item.classList.add('cosmic-text');
-                item.innerText = word;
-                const angle = (index / words.length) * Math.PI * 2;
-                const radius = 60 + (index * 14);
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                item.style.transform = `translate(${x}px, ${y}px) rotateZ(${-angle * 180 / Math.PI}deg)`;
-                spiral.appendChild(item);
-            });
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 400;
+            camera.position.y = 150;
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // إضافة النجوم العشوائية في الخلفية
+            const starsGeometry = new THREE.BufferGeometry();
+            const starsCount = 2500;
+            const starPositions = new Float32Array(starsCount * 3);
+
+            for(let i=0; i < starsCount * 3; i++) {
+                starPositions[i] = (Math.random() - 0.5) * 1500;
+            }
+            starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+            const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true });
+            starParticles = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(starParticles);
+
+            // بناء مجرة الدوامة التفاعلية
+            build3DGalaxy();
+
+            window.addEventListener('resize', onWindowResize);
+            animate();
         }
 
-        // بناء الـ 4 مجرات
-        buildSpiral('spiral1');
-        buildSpiral('spiral2');
-        buildSpiral('spiral3');
-        buildSpiral('spiral4');
+        // 2. هندسة الدوامة الحلزونية الاحترافية
+        function build3DGalaxy() {
+            galaxySpiral = new THREE.Group();
+            const particleCount = 1000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
 
-        // دالة التنقل الاحترافية بين المشاهد (تأثير تيك توك السينمائي)
-        function goToScene(sceneNumber, transformValue) {
-            // تشغيل الأغنية من المقطع الحماسي في أول ضغطة
+            const color1 = new THREE.Color('#ff0055');
+            const color2 = new THREE.Color('#7209b7');
+
+            for (let i = 0; i < particleCount; i++) {
+                const r = (i / particleCount) * 250;
+                const theta = i * 0.15;
+
+                const x = Math.cos(theta) * r + (Math.random() - 0.5) * 20;
+                const y = (Math.random() - 0.5) * 15;
+                const z = Math.sin(theta) * r + (Math.random() - 0.5) * 20;
+
+                positions[i * 3] = x;
+                positions[i * 3 + 1] = y;
+                positions[i * 3 + 2] = z;
+
+                const mixedColor = color1.clone().lerp(color2, Math.random());
+                colors[i * 3] = mixedColor.r;
+                colors[i * 3 + 1] = mixedColor.g;
+                colors[i * 3 + 2] = mixedColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 3.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            const points = new THREE.Points(geometry, material);
+            galaxySpiral.add(points);
+            scene.add(galaxySpiral);
+        }
+
+        // 3. أنيميشن الحركة اللانهائية والكاميرا السينمائية
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // حركة دوامة المجرة والنجوم
+            if(galaxySpiral) galaxySpiral.rotation.y -= 0.003;
+            if(starParticles) starParticles.rotation.y += 0.0005;
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // 4. نظام التحكم بالخطوات والتنقل الفضائي الديناميكي
+        let currentStep = 0;
+        function nextStep() {
             if(music.paused) {
                 music.play().then(() => { music.currentTime = 120; }).catch(e => {});
             }
 
-            // تحريك حاوية الفضاء بالكامل (الكاميرا)
-            viewport.style.transform = transformValue;
+            currentStep++;
+            const textEl = document.getElementById('card-text');
+            const titleEl = document.getElementById('card-title');
+            const btnEl = document.getElementById('next-btn');
 
-            // تغيير فلاتر الخلفية لإعطاء طابع لوني فريد لكل كوكب
-            if(sceneNumber === 2) space.style.filter = "hue-rotate(90deg) saturate(1.5)";
-            else if(sceneNumber === 3) space.style.filter = "hue-rotate(200deg) saturate(2)";
-            else if(sceneNumber === 4) space.style.filter = "hue-rotate(300deg) brightness(1.2)";
-            else space.style.filter = "none";
+            textEl.style.opacity = 0;
 
-            // إدارة إظهار وإخفاء الكروت بنعومة منعا للتداخل
-            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
             setTimeout(() => {
-                document.getElementById(`s${sceneNumber}`).classList.add('active');
+                if (currentStep === 1) {
+                    titleEl.innerText = "كوكب العيون الأجمل 🔮";
+                    textEl.innerHTML = "في كل ركن في المجرة دي، وفي كل نبضة من نبضات قلبي، مفيش غير اسمك وبس.. ربنا يخليكي ليا يا أحلى عيون في الكون كله! 💕🦋";
+                    btnEl.innerText = "التحليق لسديم العشق 🌌";
+                    
+                    // تحريك الكاميرا لمشهد وزاوية جديدة تماماً
+                    camera.position.set(0, 300, 100);
+                    camera.lookAt(0,0,0);
+                } else if (currentStep === 2) {
+                    titleEl.innerText = "نجمة سمايا الوحيدة 💎";
+                    textEl.innerHTML = "مهما لفيت الدنيا ومهما شفت نجوم، هيفضل مكانك فوق عالي ومنور دنيتي.. مخلية حياتي كلها حب وسعادة، بعشقك لآخر يوم في عمري! ✨❤️";
+                    btnEl.innerText = "الوصول لمركز الكون 👑";
+                    
+                    camera.position.set(250, 80, 250);
+                    camera.lookAt(0,0,0);
+                } else {
+                    titleEl.innerText = "مجرّة ملوكة السحرية 🌌";
+                    textEl.innerHTML = "كل ثانية بتمر وأنتِ معايا، بحس إن الكون كله بيلف حوالينا.. أنتِ مش بس ملكة قلبي، أنتِ المجرة والكون بتاعي كله! 💖";
+                    btnEl.innerText = "استكشاف البُعد التالي 🚀";
+                    
+                    camera.position.set(0, 150, 400);
+                    camera.lookAt(0,0,0);
+                    currentStep = 0;
+                }
+                textEl.style.opacity = 1;
             }, 400);
         }
+
+        // تشغيل كل شيء عند فتح الصفحة
+        window.onload = initThree;
     </script>
 </body>
 </html>
